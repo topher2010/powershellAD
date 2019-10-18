@@ -114,37 +114,6 @@ $Database.location = new-object system.drawing.point(110,280)
 $Database.Font = "Microsoft Sans Serif,10"
 $CopyADUser.controls.Add($Database)
 
-$SelectDatabase = New-Object system.windows.Forms.ComboBox
-$SelectDatabase.Text = "Select Database"
-$SelectDatabase.Width = 124
-$SelectDatabase.Height = 20
-$SelectDatabase.Add_DropDown({
-#add here code triggered by the event
-    $SelectDatabase.items.add("ACIDB")
-    $SelectDatabase.items.add("ANX1DB")
-    $SelectDatabase.items.add("ANX2DB")
-    $SelectDatabase.items.add("APADB")
-    $SelectDatabase.items.add("CODB1")
-    $SelectDatabase.items.add("COTADB")
-    $SelectDatabase.items.add("DOUDB")
-    $SelectDatabase.items.add("EYMDB")
-    $SelectDatabase.items.add("FLODB")
-    $SelectDatabase.items.add("FTGDB")
-    $SelectDatabase.items.add("GLODB")
-    $SelectDatabase.items.add("JOURNAL1")
-    $SelectDatabase.items.add("JOURNALDB")
-    $SelectDatabase.Items.Add("LEWDB")
-    $SelectDatabase.items.add("PHXDB")
-    $SelectDatabase.items.add("PVDB")
-    $SelectDatabase.items.add("SAFDB")
-    $SelectDatabase.items.add("TUCDB")
-    $SelectDatabase.items.add("WINDB")
-    $SelectDatabase.items.add("YUMDB")
-})
-$SelectDatabase.location = new-object system.drawing.point(125,310)
-$SelectDatabase.Font = "Microsoft Sans Serif,10"
-$CopyADUser.controls.Add($SelectDatabase)
-
 $CreateAccount = New-Object system.windows.Forms.Button
 $CreateAccount.Text = "Create Account"
 $CreateAccount.Width = 127
