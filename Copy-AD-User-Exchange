@@ -203,9 +203,6 @@ $TempMembership = Get-ADUser -Identity $UsernameCopy.Text -Properties MemberOf |
                             Select -ExpandProperty MemberOf | 
                             Add-ADGroupMember -Members $Username.Text
 
-Enable-Mailbox –Identity azcorrections\$User.Text –alias $User.Text –Database $SelectDatabase.Text
-
-Set-Mailbox -Identity USERNAME –ManagedFolderMailboxPolicy  “ADC Default MRM Policy”
 })
 $CreateAccount.location = new-object system.drawing.point(125,370)
 $CreateAccount.Font = "Microsoft Sans Serif,10"
