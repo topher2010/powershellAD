@@ -1,5 +1,3 @@
-Add-PSSnapin Microsoft.Exchange.Management.Powershell.E2010
-
 Add-Type -AssemblyName System.Windows.Forms
 
 $CopyADUser = New-Object system.Windows.Forms.Form
@@ -105,15 +103,6 @@ $PhoneNumber.location = new-object system.drawing.point(242,220)
 $PhoneNumber.Font = "Microsoft Sans Serif,10"
 $CopyADUser.controls.Add($PhoneNumber)
 
-$Database = New-Object system.windows.Forms.Label
-$Database.Text = "Select Exchange Database"
-$Database.AutoSize = $true
-$Database.Width = 25
-$Database.Height = 10
-$Database.location = new-object system.drawing.point(110,280)
-$Database.Font = "Microsoft Sans Serif,10"
-$CopyADUser.controls.Add($Database)
-
 $CreateAccount = New-Object system.windows.Forms.Button
 $CreateAccount.Text = "Create Account"
 $CreateAccount.Width = 127
@@ -171,6 +160,7 @@ New-ADUser -Name $New_DisplayName @params
 $TempMembership = Get-ADUser -Identity $UsernameCopy.Text -Properties MemberOf | 
                             Select -ExpandProperty MemberOf | 
                             Add-ADGroupMember -Members $Username.Text
+
 
 })
 $CreateAccount.location = new-object system.drawing.point(125,370)
