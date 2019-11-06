@@ -1,5 +1,34 @@
 Add-Type -AssemblyName System.Windows.Forms
 
+function msgbox {
+    param (
+        [string]$Message,
+        [string]$Title = 'Message box title',   
+        [string]$buttons = 'OKCancel'
+    )
+
+    switch ($buttons) {
+        'ok' {$btn = [System.Windows.Forms.MessageBoxButtons]::OK; break}
+        'okcancel' {$btn = [System.Windows.Forms.MessageBoxButtons]::OKCancel; break}
+        'AbortRetryIgnore' {$btn = [System.Windows.Forms.MessageBoxButtons]::AbortRetryIgnore; break}
+        'YesNoCancel' {$btn = [System.Windows.Forms.MessageBoxButtons]::YesNoCancel; break}
+        'YesNo' {$btn = [System.Windows.Forms.MessageBoxButtons]::yesno; break}
+        'RetryCancel'{$btn = [System.Windows.Forms.MessageBoxButtons]::RetryCancel; break}
+        default {$btn = [System.Windows.Forms.MessageBoxButtons]::RetryCancel; break}
+     }
+    
+function Check-Username {
+
+    $Usrnme = $Username.Text
+    $Result = Get-ADUser $Usrnme | Select SamAccountName
+    $msgbx1 = "5"
+
+    If($result.SamAccountName -eq $Usrnme) {
+        $msgbx1 = msgbox -message "This username already exists, please try a new one" -title "Username already exists" -buttons ok
+        
+    }
+}
+
 $CopyADUser = New-Object system.Windows.Forms.Form
 $CopyADUser.Text = "Copy AD User"
 $CopyADUser.BackColor = "#ffffff"
