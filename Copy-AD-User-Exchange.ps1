@@ -16,8 +16,9 @@ function msgbox {
         'RetryCancel'{$btn = [System.Windows.Forms.MessageBoxButtons]::RetryCancel; break}
         default {$btn = [System.Windows.Forms.MessageBoxButtons]::RetryCancel; break}
      }
+    }
     
-function Check-Username {
+function Get-Username {
 
     $Usrnme = $Username.Text
     $Result = Get-ADUser $Usrnme | Select SamAccountName
@@ -25,7 +26,7 @@ function Check-Username {
 
     If($result.SamAccountName -eq $Usrnme) {
         $msgbx1 = msgbox -message "This username already exists, please try a new one" -title "Username already exists" -buttons ok
-        
+
     }
 }
 
