@@ -22,8 +22,7 @@ function Get-Username {
 
     $Usrnme = $Username.Text
     $Result = Get-ADUser $Usrnme | Select SamAccountName
-    $msgbx1 = "5"
-
+    
     If($result.SamAccountName -eq $Usrnme) {
         $msgbx1 = msgbox -message "This username already exists, please try a new one" -title "Username already exists" -buttons ok
 
@@ -139,6 +138,8 @@ $CreateAccount.Width = 127
 $CreateAccount.Height = 27
 $CreateAccount.Add_MouseClick({
 #add here code triggered by the event
+
+Get-Username
 
 $New_Pass = ($NewPassword.Text) | ConvertTo-SecureString -AsPlainText -Force
 $New_DisplayName = $LastName.Text + ', ' + $FirstName.Text 
