@@ -183,7 +183,8 @@ $params = @{'SamAccountName' = $Username.Text;
             'Department' = $NewDepartment.Department;
             'Company' = $NewCompany.Company;
             'ScriptPath' = $NewScript.ScriptPath;
-			'OfficePhone' = $PhoneNumber.text;
+            'OfficePhone' = $PhoneNumber.text;
+            'EmailAddress' = $Username.Text + '@azadc.gov'
             }
 
 New-ADUser -Name $New_DisplayName @params
