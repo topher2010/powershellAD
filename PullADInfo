@@ -1,0 +1,78 @@
+<# This form was created using POSHGUI.com  a free online gui designer for PowerShell
+.NAME
+    CopyUserData
+.SYNOPSIS
+    Used to copy user data
+.DESCRIPTION
+    Used for copying user Object (AD Location) and group membership
+.INPUTS
+    Username
+#>
+
+$FinalOutput = ""
+
+Function AccountInfo {
+    $InfoOutput.Clear()
+
+    Write-Output "Object: `r`n" | Out-File .\UserData.txt
+    $Object = Get-ADUser -Identity $userlogin.text -Properties * | select CanonicalName | ft -HideTableHeaders | Out-File -Append .\UserData.txt
+    Write-Output "Group Membership: `r`n" | Out-File -Append .\UserData.txt
+    $Groupmemberhsip = Get-ADPrincipalGroupMembership $userlogin.text | select name | ft -HideTableHeaders | Out-File -Append .\UserData.txt
+
+    $FinalOutput = Get-Content -Path .\UserData.txt
+
+    $InfoOutput.AppendText($FinalOutput)
+}
+
+Add-Type -AssemblyName System.Windows.Forms
+[System.Windows.Forms.Application]::EnableVisualStyles()
+
+$UserData                        = New-Object system.Windows.Forms.Form
+$UserData.ClientSize             = '379,236'
+$UserData.text                   = "Copy User Data"
+$UserData.TopMost                = $false
+
+$CopyUserData                    = New-Object system.Windows.Forms.Label
+$CopyUserData.text               = "Copy User Data"
+$CopyUserData.AutoSize           = $true
+$CopyUserData.width              = 25
+$CopyUserData.height             = 10
+$CopyUserData.location           = New-Object System.Drawing.Point(143,36)
+$CopyUserData.Font               = 'Microsoft Sans Serif,10'
+
+$EnterUserLogin                  = New-Object system.Windows.Forms.Label
+$EnterUserLogin.text             = "Enter User Login:"
+$EnterUserLogin.AutoSize         = $true
+$EnterUserLogin.width            = 25
+$EnterUserLogin.height           = 10
+$EnterUserLogin.location         = New-Object System.Drawing.Point(70,75)
+$EnterUserLogin.Font             = 'Microsoft Sans Serif,10'
+
+$userlogin                       = New-Object system.Windows.Forms.TextBox
+$userlogin.multiline             = $false
+$userlogin.width                 = 100
+$userlogin.height                = 20
+$userlogin.location              = New-Object System.Drawing.Point(198,71)
+$userlogin.Font                  = 'Microsoft Sans Serif,10'
+
+$GO                              = New-Object system.Windows.Forms.Button
+$GO.text                         = "GO"
+$GO.width                        = 60
+$GO.height                       = 30
+$GO.location                     = New-Object System.Drawing.Point(145,132)
+$GO.Font                         = 'Microsoft Sans Serif,10'
+
+$InfoOutput                      = New-Object system.Windows.Forms.TextBox
+$InfoOutput.multiline            = $true
+$InfoOutput.width                = 310
+$InfoOutput.height               = 310
+$InfoOutput.location             = New-Object System.Drawing.Point(37,199)
+$InfoOutput.Font                 = 'Microsoft Sans Serif,10'
+
+$UserData.controls.AddRange(@($CopyUserData,$EnterUserLogin,$userlogin,$GO,$InfoOutput))
+
+#Write your logic code here
+
+$GO.Add_MouseClick({AccountInfo})
+
+[void]$UserData.ShowDialog()
