@@ -19,7 +19,7 @@ Function AccountInfo {
     Write-Output "Group Membership: `r`n" | Out-File -Append .\UserData.txt
     $Groupmemberhsip = Get-ADPrincipalGroupMembership $userlogin.text | select name | ft -HideTableHeaders | Out-File -Append .\UserData.txt
 
-    $FinalOutput = Get-Content -Path .\UserData.txt
+    $FinalOutput = Get-Content -Path .\UserData.txt |Out-String
 
     $InfoOutput.AppendText($FinalOutput)
 }
@@ -28,7 +28,7 @@ Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
 $UserData                        = New-Object system.Windows.Forms.Form
-$UserData.ClientSize             = '379,236'
+$UserData.ClientSize             = '379,536'
 $UserData.text                   = "Copy User Data"
 $UserData.TopMost                = $false
 
